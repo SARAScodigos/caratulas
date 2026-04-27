@@ -4,6 +4,22 @@ const coverTemplates = {
     faculty: "Facultad de Ingeniería",
     logoPath: "images/logotipo-utp.png",
     filePrefix: "caratula-utps",
+    widthLogo: 300,
+    heightLogo: 75,
+    logoPosition: "aboveTitle",
+    universitySize: 28,
+    facultySize: 24,
+  },
+  upao: {
+    university: "Universidad Privada Antenor Orrego",
+    faculty: "Facultad de Ciencias Económicas",
+    logoPath: "images/logotipo-upao.png",
+    filePrefix: "caratula-upao",
+    logoPosition: "belowTitle",
+    widthLogo: 200,
+    heightLogo: 250,
+    universitySize: 36,
+    facultySize: 32,
   },
 };
 
@@ -18,13 +34,21 @@ form.addEventListener("submit", async (event) => {
 
   try {
     const data = getFormData();
-    const doc = await createCoverDocument("utp", data);
+    const doc = await createCoverDocument(data.university, data);
     const blob = await docx.Packer.toBlob(doc);
-
-    downloadBlob(
-      blob,
-      `${coverTemplates.utp.filePrefix}-${slugify(data.topic)}.docx`,
-    );
+    const univ = await document.querySelector("#universidad").value;
+    if (univ == "utp") {
+      downloadBlob(
+        blob,
+        `${coverTemplates.utp.filePrefix}-${slugify(data.topic)}.docx`,
+      );
+    }
+    if (univ == "upao") {
+      downloadBlob(
+        blob,
+        `${coverTemplates.upao.filePrefix}-${slugify(data.topic)}.docx`,
+      );
+    }
   } catch (error) {
     console.error(error);
     alert("No se pudo generar la caratula. Revisa la consola del navegador.");
@@ -41,6 +65,7 @@ function getFormData() {
     student: document.querySelector("#student").value.trim(),
     teacher: document.querySelector("#teacher").value.trim(),
     career: document.querySelector("#career").value.trim(),
+    university: document.querySelector("#universidad").value,
     city: document.querySelector("#city").value.trim(),
     year: new Date().getFullYear().toString(),
   };
@@ -53,7 +78,21 @@ function convertCm(cm) {
 async function createCoverDocument(templateName, data) {
   const template = coverTemplates[templateName];
   const logo = await loadImage(template.logoPath);
+  const logoElement = centeredImage(
+    logo,
+    template.widthLogo,
+    template.heightLogo,
+  );
 
+  const titleElements = [
+    centeredText(template.university, template.universitySize, true),
+    centeredText(template.faculty, template.facultySize, true),
+  ];
+
+  const headerChildren =
+    template.logoPosition === "aboveTitle"
+      ? [logoElement, spacer(500), ...titleElements]
+      : [...titleElements, spacer(300), logoElement];
   return new docx.Document({
     sections: [
       {
@@ -68,10 +107,7 @@ async function createCoverDocument(templateName, data) {
           },
         },
         children: [
-          centeredImage(logo, 300, 75),
-          spacer(500),
-          centeredText(template.university, 28, true),
-          centeredText(template.faculty, 24, true),
+          ...headerChildren,
           spacer(400),
           centeredText(data.topic, 28, true),
           spacer(400),
@@ -105,6 +141,7 @@ async function loadImage(path) {
 function centeredImage(data, width, height) {
   return new docx.Paragraph({
     alignment: docx.AlignmentType.CENTER,
+
     children: [
       new docx.ImageRun({
         data,

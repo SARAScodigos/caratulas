@@ -1,0 +1,28 @@
+#universidad {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#universidad:focus {
+  border-color: #ff0000; /* Color personalizado al hacer clic */
+  box-shadow: 0 0 0 0.25 darkred; /* Resplandor */
+}
+
+/* Nota: Personalizar el fondo de los <option> es limitado por el navegador, 
+   pero puedes mejorar la apariencia general del select */
+#universidad option {
+  padding: 10px;
+  font-weight: 500;
+}
+
+.boton {
+  background-color: rgb(10, 202, 42);
+  border: 1px solid #0b8f63;
+  box-shadow: 1px 1px 50px 1px rgb(132, 155, 0);
+  color: wheat;
+}
+
+.boton:hover {
+  background-color: #db7d01;
+}
