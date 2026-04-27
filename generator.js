@@ -54,7 +54,7 @@ form.addEventListener("submit", async (event) => {
     alert("No se pudo generar la caratula. Revisa la consola del navegador.");
   } finally {
     downloadButton.disabled = false;
-    downloadButton.textContent = "Descargar DOCX";
+    downloadButton.textContent = "Generar uno más ❤️";
   }
 });
 
