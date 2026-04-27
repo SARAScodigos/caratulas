@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Caratulas UTP</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-light">
+    <main class="container py-5">
+      <section class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <div class="bg-white border rounded-2 p-4 p-md-5">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <img
+                src="images/logotipo-utp.png"
+                alt="Logotipo UTP"
+                style="width: 150px; height: auto"
+              />
+              <div>
+                <h1 class="h3 mb-1">Generador de caratulas UTP</h1>
+                <p class="text-secondary mb-0">
+                  Completa los datos y descarga la caratula en formato DOCX.
+                </p>
+              </div>
+            </div>
+
+            <form id="coverForm" class="row g-3">
+              <div class="col-md-6">
+                <label for="course" class="form-label">Curso</label>
+                <input
+                  id="course"
+                  class="form-control"
+                  type="text"
+                  value="Programación Web"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="topic" class="form-label">Tema</label>
+                <input
+                  id="topic"
+                  class="form-control"
+                  type="text"
+                  value="Proyecto final"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="student" class="form-label">Estudiante</label>
+                <input
+                  id="student"
+                  class="form-control"
+                  type="text"
+                  value="Wilder Julcahuanca More"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="teacher" class="form-label">Docente</label>
+                <input
+                  id="teacher"
+                  class="form-control"
+                  type="text"
+                  value="Un nombre de docente más"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="career" class="form-label">Carrera</label>
+                <input
+                  id="career"
+                  class="form-control"
+                  type="text"
+                  value="Ingeniería de Sistemas"
+                  required
+                />
+              </div>
+
+              <div class="col-md-6">
+                <label for="city" class="form-label">Ciudad</label>
+                <input
+                  id="city"
+                  class="form-control"
+                  type="text"
+                  value="Piura"
+                  required
+                />
+              </div>
+
+              <div class="col-12 pt-2">
+                <button
+                  id="downloadButton"
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Descargar DOCX
+                </button>
+                <button type="submit">loca loca</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="generator.js"></script>
+  </body>
+</html>
